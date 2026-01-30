@@ -23,6 +23,7 @@ jobs:
         provider: 'azurerm'
         command: 'init'
         workingDirectory: '$(System.DefaultWorkingDirectory)/'
+        backendServiceArm: 'ppsc'
         backendAzureRmOverrideSubscriptionID: '3be50968-9f1c-40cd-9f07-cf3bfdb72e22'
         backendAzureRmResourceGroupName: 'rg-pashya'
         backendAzureRmStorageAccountName: 'stgpasha'
