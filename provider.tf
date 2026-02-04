@@ -6,9 +6,9 @@ terraform {
     }
   }
   backend "azurerm" {
-    resource_group_name  = "rg-pasha"
-    storage_account_name = "storagepasha"
-    container_name       = "tfstate"
+    resource_group_name  = "rg-prashant"
+    storage_account_name = "stgprashant"
+    container_name       = "containerps"
     key                  = "dev.terraform.tfstate"
   }
 }
