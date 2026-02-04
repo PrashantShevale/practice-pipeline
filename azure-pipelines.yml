@@ -1,2 +1,46 @@
+name: ado pipeline
 
- 
+trigger: none
+
+pool: selfhostedagent
+
+jobs:
+    - job: terraforminstall
+      displayName: job1 terraform installation
+      steps:
+      - task: TerraformInstaller@1
+        displayName: terraform installation
+        inputs:
+          terraformVersion: 'latest'
+
+    - job: terraforminit
+      displayName: job2 terraform init
+      steps:
+      - task: TerraformTask@5
+        displayName: terraform init
+        inputs:
+          provider: 'azurerm'
+          command: 'init'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/'
+          backendServiceArm: 'newserviceconnection'
+          backendAzureRmResourceGroupName: 'rg-prashant'
+          backendAzureRmStorageAccountName: 'stgprashant'
+          backendAzureRmContainerName: 'containerps'
+          backendAzureRmKey: 'dev.terraform.tfstate'
+
+      - task: TerraformTask@5
+        displayName: terraform plan
+        inputs:
+          provider: 'azurerm'
+          command: 'plan'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/'
+          environmentServiceNameAzureRM: 'newserviceconnection'
+
+      - task: TerraformTask@5
+        displayName: terraform apply
+        inputs:
+          provider: 'azurerm'
+          command: 'apply'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/'
+          commandOptions: '-auto-approve'
+          environmentServiceNameAzureRM: 'newserviceconnection'
