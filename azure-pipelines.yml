@@ -27,6 +27,7 @@ jobs:
           backendAzureRmStorageAccountName: 'stgprashant'
           backendAzureRmContainerName: 'containerps'
           backendAzureRmKey: 'dev.terraform.tfstate'
+          backendAzureRmUseEntraIdForAuthentication: true
 
       - task: TerraformTask@5
         displayName: terraform plan
